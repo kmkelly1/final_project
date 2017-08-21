@@ -1,0 +1,93 @@
+<!-- Validation failure messages -->
+<% if @engagement.errors.any? %>
+  <% @engagement.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Engagement</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_engagement" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        
+
+        <input type="hidden" name="user_id" id="user_id" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <!-- Label and input for artwork_id -->
+      <div class="form-group">
+        <label for="artwork_id" class="control-label">
+          Artwork
+        </label>
+        <%= select_tag("artwork_id", options_from_collection_for_select(Artwork.all, :id, :title), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for notes -->
+      <div class="form-group">
+        <label for="notes" class="control-label">
+          Notes
+        </label>
+
+        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @engagement.notes %></textarea>
+      </div>
+      
+      <!--<div class="form-group">-->
+      <!--  <label for="response" class="control-label">-->
+      <!--    Responses-->
+      <!--  </label>-->
+
+      <!--  <textarea id="response" name="response" placeholder="Responses" class="form-control" rows="3"><%= @engagement.responses %></textarea>-->
+      <!--</div>-->
+      
+       <div class="form-group">
+        <label for="feeling" class="control-label">
+          Feeling
+        </label>
+        
+        
+        <form action="/create_response" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for engagement_id -->
+            <div class="form-group"></div>
+              <input type="hidden" id="engagement_id" name="engagement_id" placeholder="Engagement" class="form-control" value="<%= @response.engagement_id %>">
+            </div>
+
+          <!-- Label and input for feeling_id -->
+            <div class="form-group">
+              <% @feelings.each do |feeling| %>
+                <label for="feeling" class="control-label">
+                  <%= feeling.name %>
+                </label>
+                <div class="checkbox-inline">
+                    <label>
+                      <input type="checkbox" name="feeling" id="feeling" class="form-control" value="<%= @response.feeling_id %>"> 
+                    </label>
+                </div>
+              <% end %>
+             </div>
+        
+      </div>
+      
+
+        <button class="btn btn-success">
+          Create Engagement
+        </button>
+        or
+        <a href="/engagements">Cancel</a>
+        </form>
+    </form
+  </div>
+</div>

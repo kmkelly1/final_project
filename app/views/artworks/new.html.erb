@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @artwork.errors.any? %>
+  <% @artwork.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Artwork</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_artwork" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @artwork.title %>">
+      </div>
+
+      <!-- Label and input for date -->
+      <div class="form-group">
+        <label for="date" class="control-label">
+          Date
+        </label>
+
+        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @artwork.date %>">
+      </div>
+
+      <!-- Label and input for artist_id -->
+      <div class="form-group">
+        <label for="amaker" class="control-label">
+          Maker
+        </label>
+
+        <input type="text" id="artist_id" name="artist_id" placeholder="Artist" class="form-control" value="<%= @artwork.artist_id %>">
+      </div>
+
+      <!-- Label and input for medium -->
+      <div class="form-group">
+        <label for="medium" class="control-label">
+          Medium
+        </label>
+
+        <input type="text" id="medium" name="medium" placeholder="Medium" class="form-control" value="<%= @artwork.medium %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Artwork
+      </button>
+      or
+      <a href="/artworks">Cancel</a>
+    </form>
+  </div>
+</div>

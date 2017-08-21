@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @follow.errors.any? %>
+  <% @follow.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Follow</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_follow" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for send_user_id -->
+      <div class="form-group">
+        <label for="send_user_id" class="control-label">
+          Send user
+        </label>
+
+        <input type="text" id="send_user_id" name="send_user_id" placeholder="Send user" class="form-control" value="<%= @follow.send_user_id %>">
+      </div>
+
+      <!-- Label and input for receive_user_id -->
+      <div class="form-group">
+        <label for="receive_user_id" class="control-label">
+          Receive user
+        </label>
+
+        <input type="text" id="receive_user_id" name="receive_user_id" placeholder="Receive user" class="form-control" value="<%= @follow.receive_user_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Follow
+      </button>
+      or
+      <a href="/follows">Cancel</a>
+    </form>
+  </div>
+</div>

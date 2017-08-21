@@ -1,0 +1,64 @@
+<!-- Validation failure messages -->
+<% if @artist.errors.any? %>
+  <% @artist.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Artist</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_artist" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for nationality -->
+      <div class="form-group">
+        <label for="nationality" class="control-label">
+          Nationality
+        </label>
+
+        <input type="text" id="nationality" name="nationality" placeholder="Nationality" class="form-control" value="<%= @artist.nationality %>">
+      </div>
+
+      <!-- Label and input for dob -->
+      <div class="form-group">
+        <label for="dob" class="control-label">
+          Dob
+        </label>
+
+        <input type="text" id="dob" name="dob" placeholder="Dob" class="form-control" value="<%= @artist.dob %>">
+      </div>
+
+      <!-- Label and input for dod -->
+      <div class="form-group">
+        <label for="dod" class="control-label">
+          Dod
+        </label>
+
+        <input type="text" id="dod" name="dod" placeholder="Dod" class="form-control" value="<%= @artist.dod %>">
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @artist.name %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Artist
+      </button>
+      or
+      <a href="/artists">Cancel</a>
+    </form>
+  </div>
+</div>
