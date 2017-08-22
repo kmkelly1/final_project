@@ -23,19 +23,16 @@ class EngagementsController < ApplicationController
 
   def create
     @engagement = Engagement.new
-    @response = Response.new
-    
-    @response.engagement_id = @engagement.id
 
     @engagement.user_id = params[:user_id]
     @engagement.artwork_id = params[:artwork_id]
     @engagement.notes = params[:notes]
-    @response.feeling_id = params[:feeling_id]
+    @engagement.feeling_id = params[:feeling_id]
     # @engagement.feeling = params[:feelings]
     save_status = @engagement.save
     
     
-    @response.save
+
 
     if save_status == true
       redirect_to("/engagements/#{@engagement.id}", :notice => "Engagement created successfully.")

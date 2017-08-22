@@ -65,20 +65,15 @@
               <input type="hidden" id="engagement_id" name="engagement_id" placeholder="Engagement" class="form-control" value="<%= @response.engagement_id %>">
             </div>
 
-          <!-- Label and input for feeling_id -->
-            <div class="form-group">
-              <% @feelings.each do |feeling| %>
-                <label for="feeling" class="control-label">
-                  <%= feeling.name %>
-                </label>
-                <div class="checkbox-inline">
-                    <label>
-                      <input type="checkbox" name="feeling" id="feeling" class="form-control" value="<%= @response.feeling_id %>"> 
-                    </label>
-                </div>
-              <% end %>
-             </div>
-        
+         
+             
+             <div class="form-group">
+              <label for="feeling_id" class="control-label">
+                Feeling
+              </label>
+              <%= select_tag("feeling_id", options_from_collection_for_select(Feeling.all, :id, :name), :class => "form-control") %>
+            </div>
+              
       </div>
       
 

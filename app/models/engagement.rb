@@ -8,6 +8,7 @@
 #  notes      :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  feeling_id :integer
 #
 
 class Engagement < ApplicationRecord
@@ -17,5 +18,4 @@ class Engagement < ApplicationRecord
     has_many :comments, :dependent => :destroy
     has_many :responses, :dependent => :destroy
     
-    has_many :feelings, :through => :responses, :source => :feeling
 end
